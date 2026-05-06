@@ -1,0 +1,31 @@
+spring:
+  datasource:
+    url: ${DB_URL}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
+    hikari:
+      maximum-pool-size: 100
+      minimum-idle: 20
+
+  jpa:
+    show-sql: false
+    properties:
+      hibernate:
+        generate_statistics: false
+        jdbc:
+          time_zone: Asia/Kolkata
+
+server:
+  port: ${PORT:8080}
+
+app:
+  jwt:
+    secret: ${JWT_SECRET}
+    expiration-ms: ${JWT_EXPIRY_MS:3600000}
+
+logging:
+  level:
+    root: WARN
+    com.tarique.bankstatement: INFO
+  file:
+    name: /var/log/bank-statement/app.log

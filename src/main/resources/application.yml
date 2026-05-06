@@ -1,0 +1,94 @@
+spring:
+  
+  application:
+    name: bank-statement-service
+
+  datasource:
+    url: jdbc:postgresql://localhost:5433/mydb?options=-c%20TimeZone=Asia/Kolkata
+    username: myuser
+    password: mypassword
+    driver-class-name: org.postgresql.Driver
+    hikari:
+      pool-name: BankHikariPool
+      minimum-idle: 10
+      maximum-pool-size: 50
+      idle-timeout: 30000
+      connection-timeout: 20000
+      max-lifetime: 1800000
+      leak-detection-threshold: 60000
+      auto-commit: false
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        format_sql: true
+        jdbc:
+          batch_size: 50
+          fetch_size: 100
+          lob:
+            non_contextual_creation: true
+          time_zone: Asia/Kolkata
+        order_inserts: true
+        order_updates: true
+        generate_statistics: false
+        session.events.log.LOG_QUERIES_SLOWER_THAN_MS: 3000
+
+  jackson:
+    serialization:
+      write-dates-as-timestamps: false
+    deserialization:
+      fail-on-unknown-properties: false
+    default-property-inclusion: non_null
+
+app:
+  jwt:
+    secret: dGhpcytpc2ErdmVyeStzdHJvbmcrc2VjcmV0K2tleStmb3Irc2lnbmluZytiYW5rK3N0YXRlbWVudHMreWVzSXRJcw==
+    expiration-ms: 3600000
+
+server:
+  port: 8080
+  compression:
+    enabled: true
+    mime-types: application/json
+    min-response-size: 1024
+  tomcat:
+    max-threads: 400
+    accept-count: 200
+    connection-timeout: 5000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, info, metrics, caches
+  endpoint:
+    health:
+      show-details: when-authorized
+  info:
+    env:
+      enabled: true
+
+springdoc:
+  swagger-ui:
+    path: /swagger-ui/index.html
+    operationsSorter: alpha
+    tagsSorter: alpha
+    try-it-out-enabled: true
+  api-docs:
+    path: /v3/api-docs
+
+logging:
+  level:
+    root: INFO
+    com.tarique.bankstatement: DEBUG
+    org.springframework.security: WARN
+    org.hibernate.SQL: WARN
+  pattern:
+    console: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+    file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
+  file:
+    name: logs/bank-statement.log
