@@ -2,8 +2,8 @@ FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-COPY target/bank-statement-1.0.0.jar app.jar
+COPY ./target/bank-statement.jar /app
 
 EXPOSE 8081
 
-ENTRYPOINT ["java","-jar","app.jar"]
+ENTRYPOINT ["java","-jar","bank-statement.jar"]
