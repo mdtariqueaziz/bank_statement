@@ -92,3 +92,5 @@ logging:
     file: "%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n"
   file:
     name: logs/bank-statement.log
+server:
+  port: 8081
