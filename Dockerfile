@@ -2,7 +2,7 @@ FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-COPY ./target/bank-statement.jar /app
+COPY target/bank-statement.jar bank-statement.jar
 
 EXPOSE 8081
 
